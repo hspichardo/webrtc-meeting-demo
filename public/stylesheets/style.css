@@ -1,0 +1,26 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00b7ff;
+}
+
+#video-chat-container {
+  width: 100%;
+  background-color: black;
+}
+
+#local-video {
+  position: absolute;
+  height: 30%;
+  width: 30%;
+  bottom: 0px;
+  /* left: 0px; */
+}
+
+#remote-video {
+  height: 100%;
+  width: 100%;
+}

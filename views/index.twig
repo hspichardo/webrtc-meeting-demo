@@ -1,0 +1,109 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+	<div style="padding: 20px;">
+		<div class="jumbotron">
+			<h1 class="display-4">{{data.user}}</h1>
+			<hr class="my-4">
+			<div class="row">
+				<div class="col-sm-3">
+					<p class="lead">Configuración</p>
+
+					<input type="hidden" id="data-user" value="{{data.user}}">
+					<div class="form-group">
+						<label for="microphone-list">Microfono</label>
+						<select class="form-control form-control-sm" name="microphone-list" id="microphone-list"></select>
+					</div>
+
+					<div class="form-group">
+						<label for="camera-list">Camara</label>
+						<select class="form-control form-control-sm" name="camera-list" id="camera-list"></select>
+					</div>
+
+					<hr class="my-4">
+					<button type="button" class="btn btn-primary btn-block btn-sm" id="drive-authorize" style="display: none;">Iniciar sesión con Google</button>
+					<button type="button" class="btn btn-danger btn-block btn-sm" id="drive-signout" style="display: none;">Cerrar Sesión de Google</button>
+					<br>
+				</div>
+				<div class="col-sm-9">
+					<div id="room-selection-container">
+
+						{% if data.user == 'Profesor' %}
+							<button onclick="createRoom()" type="button" id="create-button" class="btn btn-dark btn-sm" style="margin-bottom: 14px;">Conectarse</button>
+						{% endif %}
+
+						{% if data.user == 'Estudiante' %}
+							<div class="form-group">
+								<label for="room-input">Id de Reunión</label>
+								<input type="text" class="form-control form-control-sm " id="room-input" placeholder="Id">
+							</div>
+
+							<button onclick="joinRoom()" type="button" id="connect-button" class="btn btn-dark btn-sm">Unirme a un Reunión</button>
+						{% endif %}
+
+						{# <button type="button" id="create-button" class="btn btn-dark btn-sm" style="margin-bottom: 14px;">Comenzar una Reunión</button>
+												
+																		<div class="form-group">
+																			<label for="room-input">Id de Reunión</label>
+																			<input type="text" class="form-control form-control-sm" id="room-input" placeholder="Id">
+																		</div>
+												
+																		<button type="button" id="connect-button" class="btn btn-dark btn-sm">Unirme a un Reunión</button> #}
+					</div>
+
+					<div class="row">
+						<div class="col-xl-8 col-md-6">
+							<p class="lead" id="message" style="display: none">Id de Reunión: 0946457</p>
+							<div id="video-chat-container" class="video-position" style="display: none">
+
+								<video id="local-video" autoplay="autoplay" muted="muted"></video>
+								<video id="remote-video" autoplay="autoplay"></video>
+							</div>
+						</div>
+						<div class="col-xl-4 col-md-6">
+							<div id="option-one-container" style="display: none">
+								<p class="lead" id="message">Opciones</p>
+								<button id="mute-video" class="btn btn-light btn-block btn-sm">Deshabilitar
+																																																																								                  Video</button>
+								<button id="mute-audio" class="btn btn-light btn-block btn-sm">Deshabilitar
+																																																																								                  Audio</button>
+								<hr>
+								<button onclick="finallyRoom()" type="button" class="btn btn-danger btn-block btn-sm" style="margin-bottom: 10px;">Finalizar
+																																																																								                  Reunión</button>
+							</div>
+							<div id="option-two-container" style="display: none">
+								<p class="lead" id="message">Opciones</p>
+								<button onclick="returnCreateJoin()" type="button" class="btn btn-light btn-block btn-sm" style="margin-bottom: 10px;">Crear o Unirme a una Reunión</button>
+								<button onclick="donwloadRoom()" type="button" class="btn btn-success btn-block btn-sm" style="margin-bottom: 10px;">Descargar
+																																																																								                  Reunión</button>
+
+								<div class="alert alert-primary" role="alert" id="drive-iniciar-sesion-alert" style="display: none">
+									Para poder almacenar en tu cuenta de google drive, inicia sesión
+								</div>
+								<button onclick="saveDrive()" type="button" class="btn btn-secondary btn-block btn-sm" id="drive-save-button" style="display: none;">Guardar Reunión en Google Drive</button>
+								<hr>
+								<div class="alert alert-success" role="alert" id="drive-success-alert" style="display: none">
+									A simple success alert—check it out!
+								</div>
+								<div class="alert alert-danger" role="alert" id="drive-error-alert" style="display: none">
+									A simple danger alert—check it out!
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<br>
+			<div id="result-transcript-container"></div>
+		</div>
+	</div>
+
+	<script src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript" src="/js/utils.js"></script>
+	<script type="text/javascript" src="/js/drive.js"></script>
+	<script type="text/javascript" src="/js/transcript.js"></script>
+	<script type="text/javascript" src="/js/client.js"></script>
+	<script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
+
+{% endblock %}
