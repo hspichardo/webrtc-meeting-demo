@@ -322,7 +322,7 @@ function showVideoConference() {
   videoChatContainer.style = 'display: block'
   messageComponent.style = 'display: block'
   optionOneContainer.style = 'display: block'
-  messageComponent.innerHTML = `Id de Reunión: ${roomId}`
+  messageComponent.innerHTML = `Conference ID: ${roomId}`
 }
 
 
