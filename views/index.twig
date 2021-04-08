@@ -7,38 +7,38 @@
 			<hr class="my-4">
 			<div class="row">
 				<div class="col-sm-3">
-					<p class="lead">Configuración</p>
+					<p class="lead">Configuration</p>
 
 					<input type="hidden" id="data-user" value="{{data.user}}">
 					<div class="form-group">
-						<label for="microphone-list">Microfono</label>
+						<label for="microphone-list">Microphone</label>
 						<select class="form-control form-control-sm" name="microphone-list" id="microphone-list"></select>
 					</div>
 
 					<div class="form-group">
-						<label for="camera-list">Camara</label>
+						<label for="camera-list">Camera</label>
 						<select class="form-control form-control-sm" name="camera-list" id="camera-list"></select>
 					</div>
 
 					<hr class="my-4">
-					<button type="button" class="btn btn-primary btn-block btn-sm" id="drive-authorize" style="display: none;">Iniciar sesión con Google</button>
-					<button type="button" class="btn btn-danger btn-block btn-sm" id="drive-signout" style="display: none;">Cerrar Sesión de Google</button>
+					<button type="button" class="btn btn-primary btn-block btn-sm" id="drive-authorize" style="display: none;">Log In with Google</button>
+					<button type="button" class="btn btn-danger btn-block btn-sm" id="drive-signout" style="display: none;">Log Out Google</button>
 					<br>
 				</div>
 				<div class="col-sm-9">
 					<div id="room-selection-container">
 
-						{% if data.user == 'Profesor' %}
-							<button onclick="createRoom()" type="button" id="create-button" class="btn btn-dark btn-sm" style="margin-bottom: 14px;">Conectarse</button>
+						{% if data.user == 'Teacher' %}
+							<button onclick="createRoom()" type="button" id="create-button" class="btn btn-dark btn-sm" style="margin-bottom: 14px;">Connect</button>
 						{% endif %}
 
-						{% if data.user == 'Estudiante' %}
+						{% if data.user == 'Student' %}
 							<div class="form-group">
-								<label for="room-input">Id de Reunión</label>
+								<label for="room-input">Conference ID</label>
 								<input type="text" class="form-control form-control-sm " id="room-input" placeholder="Id">
 							</div>
 
-							<button onclick="joinRoom()" type="button" id="connect-button" class="btn btn-dark btn-sm">Unirme a un Reunión</button>
+							<button onclick="joinRoom()" type="button" id="connect-button" class="btn btn-dark btn-sm">Join a new Conference</button>
 						{% endif %}
 
 						{# <button type="button" id="create-button" class="btn btn-dark btn-sm" style="margin-bottom: 14px;">Comenzar una Reunión</button>
@@ -53,7 +53,7 @@
 
 					<div class="row">
 						<div class="col-xl-8 col-md-6">
-							<p class="lead" id="message" style="display: none">Id de Reunión: 0946457</p>
+							<p class="lead" id="message" style="display: none">Conference ID: 0946457</p>
 							<div id="video-chat-container" class="video-position" style="display: none">
 
 								<video id="local-video" autoplay="autoplay" muted="muted"></video>
@@ -62,25 +62,25 @@
 						</div>
 						<div class="col-xl-4 col-md-6">
 							<div id="option-one-container" style="display: none">
-								<p class="lead" id="message">Opciones</p>
-								<button id="mute-video" class="btn btn-light btn-block btn-sm">Deshabilitar
+								<p class="lead" id="message">Options</p>
+								<button id="mute-video" class="btn btn-light btn-block btn-sm">Disable
 																																																																								                  Video</button>
-								<button id="mute-audio" class="btn btn-light btn-block btn-sm">Deshabilitar
+								<button id="mute-audio" class="btn btn-light btn-block btn-sm">Disable
 																																																																								                  Audio</button>
 								<hr>
-								<button onclick="finallyRoom()" type="button" class="btn btn-danger btn-block btn-sm" style="margin-bottom: 10px;">Finalizar
+								<button onclick="finallyRoom()" type="button" class="btn btn-danger btn-block btn-sm" style="margin-bottom: 10px;">Stop
 																																																																								                  Reunión</button>
 							</div>
 							<div id="option-two-container" style="display: none">
-								<p class="lead" id="message">Opciones</p>
-								<button onclick="returnCreateJoin()" type="button" class="btn btn-light btn-block btn-sm" style="margin-bottom: 10px;">Crear o Unirme a una Reunión</button>
-								<button onclick="donwloadRoom()" type="button" class="btn btn-success btn-block btn-sm" style="margin-bottom: 10px;">Descargar
+								<p class="lead" id="message">Options</p>
+								<button onclick="returnCreateJoin()" type="button" class="btn btn-light btn-block btn-sm" style="margin-bottom: 10px;">Create or Join a new Conference</button>
+								<button onclick="donwloadRoom()" type="button" class="btn btn-success btn-block btn-sm" style="margin-bottom: 10px;">Download
 																																																																								                  Reunión</button>
 
 								<div class="alert alert-primary" role="alert" id="drive-iniciar-sesion-alert" style="display: none">
-									Para poder almacenar en tu cuenta de google drive, inicia sesión
+									If you want to storage in google drive please Log In
 								</div>
-								<button onclick="saveDrive()" type="button" class="btn btn-secondary btn-block btn-sm" id="drive-save-button" style="display: none;">Guardar Reunión en Google Drive</button>
+								<button onclick="saveDrive()" type="button" class="btn btn-secondary btn-block btn-sm" id="drive-save-button" style="display: none;">Storage conference on Google Drive</button>
 								<hr>
 								<div class="alert alert-success" role="alert" id="drive-success-alert" style="display: none">
 									A simple success alert—check it out!

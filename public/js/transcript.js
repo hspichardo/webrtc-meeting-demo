@@ -6,7 +6,7 @@ const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecogni
 if (typeof SpeechRecognition !== "undefined") {
 
     recognitionTranscript = new SpeechRecognition();
-    recognitionTranscript.lang = "es-ES";
+    recognitionTranscript.lang = "en-EN";
     recognitionTranscript.continuous = true;
     recognitionTranscript.interimResults = true;
 
